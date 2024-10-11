@@ -5,7 +5,7 @@ rule prepare:
     output:
         sample_object = os.path.join(result_path,'batch__{sample}','PREP','object.rds'),
         metadata = report(os.path.join(result_path,'batch__{sample}','PREP','metadata.csv'), 
-                          caption="../report/metadata_sample.rst", 
+                          caption="report/metadata_sample.rst", 
                           category="{}_{}".format(config["project_name"], module_name),
                           subcategory="{sample}",
                           labels={
@@ -19,13 +19,13 @@ rule prepare:
         mem_mb=config.get("mem", "16000"),
     threads: config.get("threads", 1)
     conda:
-        "../envs/seurat.yaml"
+        "envs/seurat.yaml"
     log:
         os.path.join("logs","rules","PREP_{sample}.log"),
     params:
         metadata = lambda w: "" if pd.isna(annot.loc["{}".format(w.sample),'metadata']) else annot.loc["{}".format(w.sample),'metadata'],
     script:
-        "../scripts/prepare.R"
+        "scripts/prepare.R"
 
 # merge into one dataset
 rule merge:
