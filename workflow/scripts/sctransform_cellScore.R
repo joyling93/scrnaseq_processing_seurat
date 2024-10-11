@@ -2,7 +2,7 @@
 #### load libraries & utility function 
 library("Seurat")
 library("sctransform")
-
+options(future.globals.maxSize = 1.0 * 1e9)
 # source utility functions
 # source("workflow/scripts/utils.R")
 ### Utility Functions
