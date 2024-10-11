@@ -19,7 +19,7 @@ rule prepare:
         mem_mb=config.get("mem", "16000"),
     threads: config.get("threads", 1)
     conda:
-        "envs/seurat.yaml"
+        "../envs/seurat.yaml"
     log:
         os.path.join("logs","rules","PREP_{sample}.log"),
     params:
