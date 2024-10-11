@@ -5,7 +5,7 @@ rule prepare:
     output:
         sample_object = os.path.join(result_path,'batch__{sample}','PREP','object.rds'),
         metadata = report(os.path.join(result_path,'batch__{sample}','PREP','metadata.csv'), 
-                          caption="report/metadata_sample.rst", 
+                          caption="../report/metadata_sample.rst", 
                           category="{}_{}".format(config["project_name"], module_name),
                           subcategory="{sample}",
                           labels={
@@ -25,7 +25,7 @@ rule prepare:
     params:
         metadata = lambda w: "" if pd.isna(annot.loc["{}".format(w.sample),'metadata']) else annot.loc["{}".format(w.sample),'metadata'],
     script:
-        "scripts/prepare.R"
+        "../scripts/prepare.R"
 
 # merge into one dataset
 rule merge:
