@@ -5,25 +5,7 @@ library("Seurat")
 # source utility functions
 # source("workflow/scripts/utils.R")
 # snakemake@source("scripts/utils.R")
-### Utility Functions
-library("data.table")
 
-# save Seurat object results
-save_seurat_object <- function (seurat_obj, result_dir){
-    
-    # make result directory if not exist
-    if (!dir.exists(result_dir)){
-        dir.create(result_dir, recursive = TRUE)
-    }
-
-    # save seurat object
-    saveRDS(seurat_obj, file=file.path(result_dir, "object.rds"))
-    # save metadata
-    fwrite(as.data.frame(seurat_obj[[]]), file = file.path(result_dir, "metadata.csv"), row.names=TRUE)
-    # save stats
-    stats <- paste0("cells: ",ncol(seurat_obj),"\nfeatures: ",nrow(seurat_obj))
-    write(stats, file=file.path(result_dir, "stats.txt"))
-}
 # helper function to assign each cell's gRNA and KO calls
 assign_grna_KO <- function(col) {
     non_zero_indices <- which(col != 0)
