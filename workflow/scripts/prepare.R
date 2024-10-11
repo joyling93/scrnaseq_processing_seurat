@@ -56,7 +56,7 @@ metadata_eval <- snakemake@config[["metadata_eval"]]
 if (dir.exists(file.path(sample_dir, "filtered_feature_bc_matrix"))){
     print("Load 10X data")
     data <- Read10X(data.dir = file.path(sample_dir, "filtered_feature_bc_matrix"))
-    seurat_obj <- CreateSeuratObject(counts = data$'Gene Expression', project=sample_name)
+    seurat_obj <- CreateSeuratObject(counts = data, project=sample_name)
 }else{
     print("Load mtx data")
     data <- ReadMtx(
